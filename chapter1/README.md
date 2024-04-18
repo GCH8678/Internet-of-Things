@@ -110,3 +110,15 @@ console.log(user === user2); // True => 두 변수가 서로 동일
 user object가 변하면서 새로운 값만을 기억하고, 이전의 값을 삭제한다는 문제점 발생
 많은 서비스에서 바뀌기 전의 정보가 필요한 경우가 생길수도 있음. 따라서, 변경 전과 후에 서로 다른 객체를 바라보게 만드는 것이 좋다.
 ```
+
+##### 1-11 객체의 가변성에 따른 문제점의 해결 방법
+```bash
+var changeName = function(user,newName){
+    return {
+        name: newName,
+        gender: user.gender
+    };
+};
+
+예제 10번에서 changeName의 함수를 위와 같이 변경하면 가변성에 의한 문제점이 해결된다.
+```
