@@ -151,7 +151,7 @@ console.log(user === user2); // false
 실행결과는 주석과 같다.
 ```
 
-##### 1-14 줓업된 객체에 대한 얕은 복사
+##### 1-14 중첩된 객체에 대한 얕은 복사
 ```bash
   var user = {
     name: 'Jaenam',
@@ -175,6 +175,32 @@ console.log(user === user2); // false
 실행결과는 주석과 같다.
 얇은 복사의 문제점을 확인할 수 있는 예제이다.
 user.urls 프로퍼티에 대해서도 불변 객체로 만들 필요가 있다.
+```
+
+##### 1-15 중첩된 객체에 대한 깊은 복사
+```bash
+var copyObject = function (target) {
+    var result = {};
+    for (var prop in target) {
+        result[prop] = target[prop];
+    }
+    return result;
+};
+var user = { ... } ; // 13번과 같아 생략
+
+var user2 = copyObject(user);
+user2.urls = copyObject(user.urls);
+
+user.urls.portfolio = 'http://portfolio.com';
+console.log(user.urls.portfolio === user2.urls.portfolio); // false
+
+user2.urls.blog = '';
+console.log(user.urls.blog === user2.urls.blog); // false
+
+
+14번까지의 copyObject를 위와 같이 수정하였다.
+실행결과는 주석과 같다.
+깊은 복사를 통해 얕은 복사로 인해 발생하는 문제점을 해결한 예제이다.
 ```
 
 
