@@ -151,6 +151,33 @@ console.log(user === user2); // false
 실행결과는 주석과 같다.
 ```
 
+##### 1-14 줓업된 객체에 대한 얕은 복사
+```bash
+  var user = {
+    name: 'Jaenam',
+    urls: {
+      portfolio: 'http://github.com/abc',
+      blog: 'http://blog.com',
+      facebook: 'http://facebook.com/abc',
+    },
+  };
+  var user2 = copyObject(user);
+  user2.name = 'Jung';
+  console.log(user.name === user2.name); // false
+
+  user.urls.portfolio = 'http://portfolio.com';
+  console.log(user.urls.portfolio === user2.urls.portfolio); // true
+  
+  user2.urls.blog = '';
+  console.log(user.urls.blog === user2.urls.blog); // true
+
+예제 12번에서의 copyObject를 활용한 예제이다.
+실행결과는 주석과 같다.
+얇은 복사의 문제점을 확인할 수 있는 예제이다.
+user.urls 프로퍼티에 대해서도 불변 객체로 만들 필요가 있다.
+```
+
+
 
 
 
