@@ -241,3 +241,31 @@ var copyObjectDeep = function(target){
   예제 16번에서 구현한 함수를 활용한 결과를 확인하는 예제이다.
   실행 결과는 주석과 같다.
 ```
+
+##### 1-18 JSON을 활용한 간단한 깊은 복사
+```bash
+var copyObjectViaJSON = function (target){
+    return JSON.parse(JSON.stringify(target));
+}
+
+var obj = {
+    a:1,
+    b:{
+        c:null,
+        d:[1,2],
+        func1: function() {console.log(3);}
+    },
+    func2: function() {console.log(4);}
+};
+var obj2 = copyObjectViaJSON(obj);
+
+obj2.a=3;
+obj2.b.c=4;
+obj.b.d[1]=3;
+
+console.log(obj); // { a: 1. b: { c: null, d: [1, 3], func1: f() }, func2: f() }
+console.log(obj2); // { a: 3. b: { c: 4,    d: [1, 2] } }
+
+JSON과 객체간 변환을 이용한 깊은 복사 방법이다.
+하지만 json으로 변환시 string으로 변환되기 때문에 순수 data만 copy되는 단점이 존재한다.(함수는 복사되지 않는다는 의미)
+```
