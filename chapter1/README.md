@@ -26,5 +26,15 @@ b= 7;
 등등 모든 기본형 데이터는 모두 불변값(immutable)을 가짐
 ```
 
+##### 1-4 참조형 데이터의 할당
+```bash
+var obj1 = { a:1, b: 'bbb'}
+
+a 와 b는 identifier 또는 property(key)라 불림
+1과 'bbb'는 data 또는 value라고 함.
+
+obj1,a,b 는 모두 identifier area에 있고, {},1,'bbb'는 data area에 존재함
+```
+
 
 
