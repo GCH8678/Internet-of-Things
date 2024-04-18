@@ -203,8 +203,20 @@ console.log(user.urls.blog === user2.urls.blog); // false
 깊은 복사를 통해 얕은 복사로 인해 발생하는 문제점을 해결한 예제이다.
 ```
 
+##### 1-16 객체의 깊은 복사를 수행하는 범용 함수
+```bash
+var copyObjectDeep = function(target){
+    var result = {};
+    if (typeof target === 'object' && target !== null){
+        for (var prop in target) {
+            result[prop] = copyObjectDeep(target[prop]);
+        }
+    }else{
+        result = target;
+    }
+    return result;
+}
 
-
-
-
+재귀적 방법을 이용하여 범용성있는 깊은 복사 함수를 구현한 예제이다.
+```
 
