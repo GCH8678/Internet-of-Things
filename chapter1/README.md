@@ -220,3 +220,24 @@ var copyObjectDeep = function(target){
 재귀적 방법을 이용하여 범용성있는 깊은 복사 함수를 구현한 예제이다.
 ```
 
+##### 1-17 깊은 복사 결과 확인
+```bash
+  var obj = {
+    a: 1,
+    b: {
+      c: null,
+      d: [1, 2],
+    },
+  };
+  var obj2 = copyObjectDeep(obj);
+  
+  obj2.a = 3;
+  obj2.b.c = 4;
+  obj.b.d[1] = 3;
+  
+  console.log(obj); // { a: 1. b: { c: null, d: [1, 3] } }
+  console.log(obj2); // { a: 3. b: { c: 4, d: { 0: 1, 1: 2 } } 
+  
+  예제 16번에서 구현한 함수를 활용한 결과를 확인하는 예제이다.
+  실행 결과는 주석과 같다.
+```
