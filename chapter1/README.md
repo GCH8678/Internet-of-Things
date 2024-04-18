@@ -344,3 +344,19 @@ undefined를 할당한 경우 empty(비어있는 경우)가 아니라 실제 und
 실행결과는 주석과 같다.
 ```
 
+##### 1-22 undefined와 null의 비교
+```bash
+var n = null;
+console.log(typeof n); //object
+
+console.log(n==undefined); //true
+console.log(n==null); //true
+
+console.log(n===undefined); //false
+console.log(n===null); //true
+
+
+null인지 undefined인지 확실히 구별하기 위해서는 동등 연산자를 활용해야 한다.
+JS 버그중 하나로 null의 type이 object로 나온다.
+실행결과는 주석과 같다.
+```
