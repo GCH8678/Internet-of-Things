@@ -122,3 +122,17 @@ var changeName = function(user,newName){
 
 예제 10번에서 changeName의 함수를 위와 같이 변경하면 가변성에 의한 문제점이 해결된다.
 ```
+
+##### 1-12 기존 정보를 복사해서 새로운 객체를 반환하는 함수(얕은 복사)
+```bash
+var copyObject = function (target){
+    var result = {};
+    for (var prop in target){
+        result[prop] = target[prop];
+    }
+    return result;
+}
+
+copyObject 함수는 result 객체에 target 객체의 프로퍼티를 복사하는 함수이다.(얕은 복사)
+```
+
