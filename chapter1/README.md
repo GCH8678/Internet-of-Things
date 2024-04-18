@@ -136,3 +136,22 @@ var copyObject = function (target){
 copyObject 함수는 result 객체에 target 객체의 프로퍼티를 복사하는 함수이다.(얕은 복사)
 ```
 
+##### 1-13 copyObject를 이용한 객체 복사
+```bash
+var user = { name: "Jaenam", gender: "male" };
+var user2 = copyObject(user);
+user2.name="Jung";
+if(user !== user2){
+    console.log("유저 정보가 변경되었습니다."); // 유저 정보가 변경되었습니다.
+}
+console.log(user.name,user2.name); // Jaenam Jung
+console.log(user === user2); // false
+
+예제 12번에서의 copyObject를 활용한 예제이다.
+실행결과는 주석과 같다.
+```
+
+
+
+
+
