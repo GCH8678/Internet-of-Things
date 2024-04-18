@@ -269,3 +269,24 @@ console.log(obj2); // { a: 3. b: { c: 4,    d: [1, 2] } }
 JSON과 객체간 변환을 이용한 깊은 복사 방법이다.
 하지만 json으로 변환시 string으로 변환되기 때문에 순수 data만 copy되는 단점이 존재한다.(함수는 복사되지 않는다는 의미)
 ```
+
+##### 1-19 자동으로 undefined를 부여하는 경우
+```bash
+var a;
+console.log(a);
+
+var obj = {a:1};
+console.log(obj.a); // 1
+console.log(obj.b); // (2) 존재하지 않는 프로퍼티에 접근
+console.log(b) // c.f) ReferenceError: b is not defined
+
+var func = function() {};
+varc = func(); // (3) 반환(return) 값이 없으면 undefined를 반환한 것으로 간주
+console.log(c); // undefined
+
+undefined를 할당하는 것은 혼동을 가져오기 때문에 NULL을 할당하는 것을 권장
+undefiend는 자바스크립트 엔진만 사용하는 것이 좋다.
+위 예제는 undefined의 부여되는 상황 예시를 보여주는 예제이다.
+실행결과는 주석과 같다.
+```
+
