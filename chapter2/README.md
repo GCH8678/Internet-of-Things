@@ -159,6 +159,21 @@ var multiply = function (a,b){ // 함수 표현식 multiply
 
 함수 표현식에서 주의할 점은 console.log 함수에서 사용되는 multiply는 아직 할당이 되지 않았기 때문에 not a function라는 TypeError가 발생한다.
 함수 선언문은 전체를 호이스팅하고 함수 표현식은 변수 선언부만 호이스팅 했기 때문에 생긴 문제이다.
-
 ```
 
+##### 2-10 함수 선언문과 함수 표현식(2)-호이스팅을 마친 상태
+```bash
+var sum = function sum (a,b){ // 함수 선언문은 전체를 호이스팅
+    return a+b;    
+};
+var multiply; // 변수는 선언부만 끌어올린다.
+console.log(sum(1,2));
+console.log(multiply(3,4));
+
+multiply = function (a,b) {
+    return a*b;
+}
+
+예제 2-9와 동일하게 작동한다.
+호이스팅을 마친 상태를 코드로 표현한 것이다
+```
