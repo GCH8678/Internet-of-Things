@@ -293,3 +293,21 @@ obj.method.apply({a:4},[5,6])
 apply 메서드는 call 메서드와 기능적으로 완전히 동일하다.
 apply 메서드는 두 번째 인자를 배열로 받아 그 배열의 요소들을 호출할 함수의 매개변수로 지정한다.
 ```
+
+##### 3-17 call/apply 메서드의 활용 1-1) 유사배열객체에 배열 메서드를 적용
+```bash
+var obj = {
+    0: 'a',
+    1: 'b',
+    2: 'c',
+    length: 3
+};
+Array.prototype.push.call(obj,'d');
+console.log(obj);                   // { 0: 'a', 1: 'b', 2: 'c', 3: 'd', length:4 }
+
+var arr = Array.prototype.slice.call(obj);
+console.log(arr);                   // ['a','b','c','d']
+
+
+call/apply 메서드를 이용하여 객체에 배열 메서드를 적용한 예제이다.
+```
