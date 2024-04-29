@@ -141,3 +141,25 @@ obj['inner']['methodB']();  // { methodB: f }               ( === obj.inner)
 this에는 호출한 주체에 대한 정보가 담긴다.
 함수를 메서드로 호출한 경우 호출한 주체는 함수명 앞의 객체 => 이 객체가 곧 this가 된다.
 ```
+
+##### 3-9 내부함수에서의 this
+```bash
+var obj1 = {
+    outer: function () {
+        console.log(this); // (1)
+        var innerFunc = function (){
+            console.log(this) // (2) (3)
+        }
+        innerFunc();
+
+        var obj2 = {
+            innerMethod: innerFunc
+        };
+        obj2.innerMethod();
+    }
+};
+obj1.outer();
+
+this가 가리키고 있는 것
+(1): obj1, (2) 전역객체(window), (3): obj2
+```
