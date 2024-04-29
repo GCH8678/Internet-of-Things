@@ -474,3 +474,32 @@ bind 메서드를 적용해서 새로 만든 함수는 한 가지 독특한 성�
 name 프로퍼티에 동사 bind의 수동태인 bound라는 접두어가 붙는다.
 함수의 name 프로퍼티가 bound xxx라면 이는 곧 함수명이 xxx인 원본 함수에 bind 메서드를 적용했다는 의미이다.
 ```
+
+
+##### 3-27 내부함수에 this 전달-call vs bind
+```bash
+var obj = {
+    outer:  function () {
+        console.log(this);
+        var innerFunc = function(){
+            console.log(this);
+        };
+        innerFunc.call(this);
+    }
+};
+obj.outer();
+
+var obj = {
+    outer:  function () {
+        console.log(this);
+        var innerFunc = function(){
+            console.log(this);
+        }.bind(this);
+        innerFunc();
+    }
+};
+obj.outer();
+
+3-1-3절에서 메서드의 내부함수에 메서드의 this를 그대로 바라보게 하기 위한 방법으로 self등의 변수를 활용한 우회법을 소개했었다.
+call,apply 또는 bind메서드를 이용하면 이를 더 깔끔하게 처리할 수 있다.
+```
