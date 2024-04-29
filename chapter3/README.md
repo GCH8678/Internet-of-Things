@@ -90,7 +90,21 @@ var d = 4;
 delete d;                       // false -> delete 불가
 console.log(d,window.d,this.d)  // Uncaught ReferenceError: d is not defined => 실제 크롬상에서는 잘 작동함. (4 4 4 출력)
 
-
-
 전역 변수를 선언하면 자바스크립트 엔진이 자동으로 전역객체의 프로퍼티로 할당하면서 추가적으로 해당 프로퍼티의 configurable attribute(변경 및 삭제가능성)을 false로 정의한다.
+```
+
+##### 3-6 함수로서 호출, 메서드로서 호출
+```bash
+var func = function (x) {
+    console.log(this,x);
+};
+func(1); // window { ... } 1
+
+var obj = {
+    method: func
+};
+obj.method(2); // { methood: f } 2
+
+함수와 메서드를 구분하는 유일한 차이점 : "독립성"
+자바스크립트에서는 상황별로 this 키워드에 다른 값을 부여하게 함으로써 이를 구현한다.
 ```
