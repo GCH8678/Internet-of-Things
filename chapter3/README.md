@@ -569,3 +569,22 @@ console.log(report.sum,report.count,report.average());  // 240 3 80
 이러한 메서드의 thisArg 값을 지정하면 콜백 함수 내부에서 this 값을 원하는 대로 변경 가능하다.
 이런 형태는 여러 내부 요소에 대해 같은 동작을 반복 수행해야 하는 배열 메서드 많이 포진돼 있으며, 같은 이유로 ES6에서 새로 등장한 Set,Map 등의 메서드에도 일부 존재한다.
 ```
+
+
+##### 3-31 콜백 함수와 함께 thisArg를 인자로 받는 메서드
+```bash
+Array.prototype.forEach(callback[, thisArg])
+Array.prototype.map(callback[, thisArg])
+Array.prototype.filter(callback[, thisArg])
+Array.prototype.some(callback[, thisArg])
+Array.prototype.every(callback[, thisArg])
+Array.prototype.find(callback[, thisArg])
+Array.prototype.findIndex(callback[, thisArg])
+Array.prototype.flatMap(callback[, thisArg])
+Array.prototype.from(arrayLike[, callback[, thisArg]])
+Set.prototype.forEach(callback[, thisArg])
+Map.prototype.forEach(callback[, thisArg])
+
+
+예제 3-30은 forEach를 예로 들었지만, 이 밖에도 thisArg를 인자로 받는 많은 메서드들이 존재한다.
+```
