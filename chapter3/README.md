@@ -523,3 +523,22 @@ obj.logThisLater2(); // obj {logThis: f, ...}
 
 콜백 함수를 인자로 받는 함수나 메서드 중에서 기본적으로 콜백 함수 내에서의 this에 관여하는 함수 또는 메서드에 대해서도 bind 메서드를 이용하면 this 값을 사용자의 입맛에 맞게 바꿀 수 있다.
 ```
+
+
+##### 3-29 화살표 함수 내부에서의 this
+```bash
+var obj = {
+    outer: function () {
+        console.log(this);
+        var innerFunc = ()=>{
+            console.log(this);
+        };
+
+        innerFunc();
+    }
+};
+obj.outer();
+
+화살표 함수는 실행 컨텍스트 생성 시 this를 바인딩하는 과정이 제외된다.
+이 함수 내부에는 this가 아예 없으며, 접근하고자 하면 스코프체인상 가장 가까운 this에 접근하게 된다.
+```
