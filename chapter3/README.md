@@ -187,3 +187,20 @@ innerFunc1 내부에서 this는 전역객체를 가리킨다.
 한편 outer 스코프에서 self라는 변수에 this를 저장한 상태에서 호출한 innerFUnc2의 경우 self에는 객체 obj가 출력된다.
 이와 같은 방식으로 this를 상속한 것 처럼 활용된다.
 ```
+
+##### 3-11 this를 바인딩하지 않는 함수(화살표 함수)
+```bash
+var obj = {
+    outer: function(){
+        console.log(this);
+        var innerFunc = () => {
+            console.log(this);
+        };
+        innerFunc();
+    }
+};
+obj.outer();
+
+함수 내부에서 this가 전역객체를 바라보는 문제를 보완하고자 도입되었다.
+화살표 함수는 실행 컨텍스트를 생성할 때 this 바인딩 과정 자체가 빠지게 되어, 상위 스코프의 this를 그대로 활용한다.
+```
