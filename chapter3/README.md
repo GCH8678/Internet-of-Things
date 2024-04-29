@@ -374,3 +374,27 @@ console.log(arr);
 
 ES6에서  유사배열객체 또는 순회 가능한 모든 종류의 데이터 타입을 배열로 전환하는 Array.from 메서드를 도입함으로써, 예제 3-19와 같은 활용은 잘 사용하지 않는다. (경험 없이 코드를 보고 의도를 파악하기 쉽지 않는 문제)
 ```
+
+
+##### 3-21 call/apply 메서드의 활용 2) 생성자 내부에서 다른 생성자를 호출
+```bash
+function Person(name,gender){
+    this.name = name;
+    this.gender = gender;
+}
+
+function Student(name,gender,school){
+    Person.call(this,name,gender);
+    this.school=school;
+}
+
+function Employee(name,gender,company){
+    Person.apply(this,[name,gender]);
+    this.company = company;
+}
+var by = new Student('보영','female','단국대');
+var jn = new Employee('재난','male','구골');
+
+
+생성자 내부에 다른 생성자와 공통된 내용이 있을 경우 call 또는 apply 를 이용하여 다른 생성자를 호출하면 간단하게 반복을 줄일 수 있다.
+```
