@@ -125,3 +125,22 @@ outer = null; // outer 식별자의 inner 함수 참조를 끊음
 클로저의 특성을 정확히 이해해야 메모리 누수등의 위험을 최소화 할 수 있다.
 하지만, 최근의 자바스크립트 엔진에서는 위와 같은 위험이 크게 줄어들었고, 개발자의 의도하에 생기는 메모리 소비에 대한 관리법만 잘 파악해서 적용하면 충분하다.
 ```
+
+##### 5-6 콜백 함수와 클로저(1)
+```bash
+var fruits = ['apple','banana','peach'];
+var $ul = document.createElement('ul');
+
+fruits.forEach(function(fruit){
+    var $li = document.createElement('li');
+    $li.innerText = fruit;
+    $li.addEventListener('click',function(){
+        alert('your choice is '+fruit);
+    });
+    $ul.appendChild($li);
+});
+document.body.appendChild($ul);
+
+대표적인 콜백 함수 중 하나인 이벤트 리스너에 관한 예시이다.
+클로저의 '외부 데이터'에 주목하면서 흐름을 따라가자.
+```
