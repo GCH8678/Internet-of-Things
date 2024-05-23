@@ -419,3 +419,30 @@ console.log(dog.greet("배고파요!")); // 왈왈, 강아지 배고파요!
 5-14 예제에서 추가로 원하는 위치에 미리 넣어놓고 나중에 빈 자리에 인자를 채워넣어 실행할 수 있도록 하였다.
 '비워놓음'을 표시학 ㅣ위해 미리 전역객체에 _라는 프로퍼티를 준비하면서 삭제 변경 등의 접근에 대한 방어 차원에서 여러 가지 프로퍼티 속성을 설정하였다.
 ```
+
+##### 5-16 부분 적용 함수 - 디바운스
+```bash
+var debounce = function(eventName,func,wait){
+    var timeoutId = null;
+    return function (event){
+        var self = this;
+        console.log(eventName,'event 발생');
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(func.bind(self,event),wait);
+    };
+};
+
+var moveHandler = function(e){
+    console.log('move event 처리');
+};
+var wheelHandler = function (e){
+    console.log('wheel evnet 처리')
+}
+
+document.body.addEventListener('mouseover',debounce('move',moveHandler,500));
+document.body.addEventListener('mousewheel',debounce('wheel',wheelHandler,700));
+
+
+실무에서 부분 함수를 사용하기에 적합한 예시이다.
+디바운스는 짧은 시간 동안 동일한 이벤트가 많이 발생할 경우 이를 전부 처리허지 않고 처음 또는 마지막에 발생한 이벤트에 대해 한번만 처리를 하는 것이다.
+```
