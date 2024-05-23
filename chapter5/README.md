@@ -293,3 +293,30 @@ fuel,power변수를 비공개 멤버로 지정해 외부에서의 접근을 제�
 이제 외부에서 오직 run 메서드를 실행하는 것과 현재의 moved 값 확인하는 두가지 동작만 할 수 있다.
 하지만 run 메서드를 다른 내용으로 덮어씌우는 등의 어뷰징이 가능한 상태이다.
 ```
+
+##### 5-12 클로저로 변수를 보호한 자동차 객체(2)
+```bash
+var createCar = function(){
+    var publicMembers={
+        get moved(){
+            return moved;
+        },
+        run: function(){
+            var km = Math.ceil(Math.random()*6);
+            var wasteFuel = km / this.power;
+            if(this.fuel < wasteFuel){
+                console.log('이동불가');
+                return;
+            }
+            fuel -= wasteFuel;
+            moved += km;
+            console.log(km+'km 이동 (총 '+this.moved+'km). 남은 연료: '+fuel);
+        }
+    };
+    Object.freeze(publicMembers);
+    return publicMembers
+};
+var car = createCar()
+
+객체를 return 하기 전에 미리 변경할 수 없게 조치를 취하였다.
+```
