@@ -168,3 +168,25 @@ alertFruit(fruits[1]);
 그런데 각 li를 클릭하면 클릭한 대상의 과일명이 아닌 [object MouseEvent]라는 값이 출력된다.
 콜백 함수의 인자에 대한 제어권을 addEventListener가 가진 상태이며, add EventListener는 콜백 함수를 호출할 때 첫 번째 인자에 '이벤트 객체'를 주입하기 때문이다.
 ```
+##### 5-8 콜백 함수와 클로저(3)
+```bash
+var fruits = ['apple','banana','peach'];
+var $ul = document.createElement('ul');
+
+var alertFruit = function (fruit){
+    alert('your choice is '+fruit);
+};
+
+fruits.forEach(function(fruit){
+    var $li = document.createElement('li');
+    $li.innerText = fruit;
+    $li.addEventListener('click',alertFruit.bind(null,fruit));
+    $ul.appendChild($li);
+});
+document.body.appendChild($ul);
+alertFruit(fruits[1]);
+
+예제 5-7의 [object MouseEvent]라는 값이 출력되는 문제를 해결했다.
+하지만 이벤트 객체가 인자로 넘어오는 순서가 바뀌는 점 및 함수 내부에서의 this가 원래의 그것과 달라지는 점은 감안해야 한다.
+이런 변경사항이 발생하지 않게끔 하면서 이슈를 해결하기 위해 bind 메서드가 아닌 고차함수를 활용한다.
+```
