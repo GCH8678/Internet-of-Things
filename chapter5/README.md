@@ -446,3 +446,25 @@ document.body.addEventListener('mousewheel',debounce('wheel',wheelHandler,700));
 실무에서 부분 함수를 사용하기에 적합한 예시이다.
 디바운스는 짧은 시간 동안 동일한 이벤트가 많이 발생할 경우 이를 전부 처리허지 않고 처음 또는 마지막에 발생한 이벤트에 대해 한번만 처리를 하는 것이다.
 ```
+
+##### 5-17 커링 함수(1)
+```bash
+var curry3 = function(func){
+    return function (a){
+        return function(b){
+            return func(a,b)
+        };
+    };
+};
+
+var getMaxWith10 = curry3(Math.max)(10);
+console.log(getMaxWith10(8));   //10
+console.log(getMaxWith10(25));  //25
+
+var getMinWith10 = curry3(Math.min)(10);
+console.log(getMinWith10(8));  //8
+console.log(getMinWith10(25));  //10
+
+
+커링 함수란 여러 개의 인자를 받는 함수를 하나의 인자만 받는 함수로 나눠서 순차적으로 호출될 수 있게 체인 형태로 구성한 것이다.
+```
