@@ -251,3 +251,32 @@ setTimeout(
 
 콜백 지옥은 콜백 함수를 익명 함수로 전달하는 과정이 반복되어 코드의 들여쓰기 수준이 감당하기 힘들 정도로 깊어지는 현상으로, 자바스크립트에서 흔히 발생하는 문제이다.
 ```
+
+##### 4-13 콜백 지옥 해결 - 기명함수로 변환
+```bash
+var coffeeList = '';
+
+var addEspresso = function(name) {
+  coffeeList = name;
+  console.log(coffeeList);
+  setTimeout(addAmericano, 500, '아메리카노');
+};
+var addAmericano = function(name) {
+  coffeeList += ', ' + name;
+  console.log(coffeeList);
+  setTimeout(addMocha, 500, '카페모카');
+};
+var addMocha = function(name) {
+  coffeeList += ', ' + name;
+  console.log(coffeeList);
+  setTimeout(addLatte, 500, '카페라떼');
+};
+var addLatte = function(name) {
+  coffeeList += ', ' + name;
+  console.log(coffeeList);
+};
+
+setTimeout(addEspresso, 500, '에스프레소');
+
+가독성 문제와 어색함을 동시에 해결하는 가장 간단한 방법으로 익명의 콜백 함수를 모두 기명함수로 전환하는 방법이 있다.
+```
