@@ -210,3 +210,44 @@ setTimeout(obj1.func.bind(obj2),1500);
 ES5에서 등장한 bind 메서드를 이용하는 방법이다.
 예제 4-9의 처음부터 바라볼 객체를 명시적으로 지정하기 때문에 다른 객체를 바라볼 수 없게 되는 아쉬움을 보안하는 훌륭한 방법이다. 
 ```
+
+##### 4-12 콜백 지옥 예시(1-1)
+```bash
+setTimeout(
+    function(name) {
+      var coffeeList = name;
+      console.log(coffeeList);
+  
+      setTimeout(
+        function(name) {
+          coffeeList += ', ' + name;
+          console.log(coffeeList);
+   
+          setTimeout(
+            function(name) {
+              coffeeList += ', ' + name;
+              console.log(coffeeList);
+  
+              setTimeout(
+                function(name) {
+                  coffeeList += ', ' + name;
+                  console.log(coffeeList);
+                },
+                500,
+                '카페라떼'
+              );
+            },
+            500,
+            '카페모카'
+          );
+        },
+        500,
+        '아메리카노'
+      );
+    },
+    500,
+    '에스프레소'
+  );
+
+콜백 지옥은 콜백 함수를 익명 함수로 전달하는 과정이 반복되어 코드의 들여쓰기 수준이 감당하기 힘들 정도로 깊어지는 현상으로, 자바스크립트에서 흔히 발생하는 문제이다.
+```
