@@ -219,3 +219,52 @@ var extendClass2 = (function(){
 예제 7-9에서는 즉시실행함수 내부에서 Bridge를 선언해서 이를 클로저로 활용함으로써 메모리에 불필요한 함수 선언을 줄였다.
 SubMethods엔 SubClass의 prototype에 담길 메서들을 객체로 전달하게끔 하였다.
 ```
+
+
+##### 7-9 클래스 상속 및 추상화 방법(2) - 빈 함수를 활용
+```bash
+var extendClass2 = (function(){
+    var Bridge = function(){};
+    return function (SuperClass, SubClass, subMethods){
+        Bridge.prototype = SuperClass.prototype;
+        SubClass.prototype = new Bridge();
+        if(subMethods){
+            for (var method in subMethods){
+                SubClass.prototype[method] = subMethods[method];
+            }
+        }
+        Object.freeze(SubClass.prototype);
+        return SubClass;
+    }
+})();
+
+예제 7-9에서는 즉시실행함수 내부에서 Bridge를 선언해서 이를 클로저로 활용함으로써 메모리에 불필요한 함수 선언을 줄였다.
+SubMethods엔 SubClass의 prototype에 담길 메서들을 객체로 전달하게끔 하였다.
+```
+
+##### 7-10 클래스 상속 및 추상화 방법(3) - Object.create 활용
+```bash
+var Rectangle = function(width,height){
+    this.width = width;
+    this.height = height;
+};
+Rectangle.prototype.getArea = function(){
+    return this.width*this.height;
+};
+var Square = function(width){
+    Rectangle.call(this,width,width);
+};
+Square.prototype = new Rectangle();
+Square.prototype = Object.create(Rectangle.prototype);
+Object.freeze(Square.prototype);
+
+
+var rect = new Rectangle(3,4);
+console.log(rect.getArea());     // 12
+var sq = new Square(5);
+console.log(sq.getArea())       // 25
+
+
+
+ES5에 도입된 Object.create를 이용한 방법이다. 이 방법은 SubClass의 prototype의 __proto__가 SuperClass의 prototype을 바라보되, SuperClass의 인스턴스가 되지는 않으므로 앞서 두 방법보다 안전하고 간단하다.
+```
