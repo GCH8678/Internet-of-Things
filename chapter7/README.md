@@ -375,3 +375,36 @@ console.log(sq.super('getArea')())  // 100
 다른 객체지향 언어들의 클래스 문법 중 하나인 'super'를 흉내낸 예제이다.
 하위 클래스에서 상위 클래스의 프로토타입 메서드에 접근하기 위한 별도의 수단을 구현한 예제이다.
 ```
+
+##### 7-15 ES5와 ES6의 클래스 문법 비교
+```bash
+var ES5 = function (name) {
+    this.name = name;
+};
+ES5.staticMethod = function () {
+    return this.name + ' staticMethod';
+};
+ES5.prototype.method = function (){
+    return this.name + ' method';
+};
+var es5Instance = new ES5('es5');
+console.log(ES5.staticMethod());
+console.log(es5Instance.method());
+
+var ES6 = class{
+    constructor(name){
+        this.name = name;
+    }
+    static staticMethod(){
+        return this.name +' staticMethod';
+    }
+    method(){
+        return this.name+' method';
+    }
+};
+var ex6Instance = new ES6('es6');
+console.log(ES6.staticMethod());
+console.log(ex6Instance.method());
+
+ES6에서 본격적으로 클래스 문법이 도입되었다.
+```
