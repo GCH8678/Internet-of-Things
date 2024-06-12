@@ -197,3 +197,25 @@ var Square = extendClass1(Rectangle,function(width){
 클래스(prototype)가 구체적인 데이터를 지니지 않게 하는 방법은 여러가지가 있다.
 그중 가장 쉬운 방법은 일단 만들고 나서 프로퍼티들을 일일이 지우고 더는 새로운 프로퍼티를 추가할 수 없게 하는 것이다.
 ```
+
+
+##### 7-9 클래스 상속 및 추상화 방법(2) - 빈 함수를 활용
+```bash
+var extendClass2 = (function(){
+    var Bridge = function(){};
+    return function (SuperClass, SubClass, subMethods){
+        Bridge.prototype = SuperClass.prototype;
+        SubClass.prototype = new Bridge();
+        if(subMethods){
+            for (var method in subMethods){
+                SubClass.prototype[method] = subMethods[method];
+            }
+        }
+        Object.freeze(SubClass.prototype);
+        return SubClass;
+    }
+})();
+
+예제 7-9에서는 즉시실행함수 내부에서 Bridge를 선언해서 이를 클로저로 활용함으로써 메모리에 불필요한 함수 선언을 줄였다.
+SubMethods엔 SubClass의 prototype에 담길 메서들을 객체로 전달하게끔 하였다.
+```
