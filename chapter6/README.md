@@ -129,3 +129,18 @@ console.log(arr.hasOwnProperty(2)) // true // arr(.__proto__)(.__proto__).hasOwn
 프로토타입 체이닝은 메서드 오버라이드와 동일한 맥락이다.
 어떤 메서드를 호출하면 자바스크립트 엔진은 데이터 자신의 프로퍼티들을 검색해서 원하는 메서드가 있으면 그 메서드를 실행하고, 없으면 __proto__를 검색해서 있으면 그 메서드를 실행하고, 없으면 다시 __proto__를 검색해서 실행하는 식으로 진행한다.
 ```
+
+##### 6-8 메서드 오버라이드와 프로토타입 체이닝
+```bash
+var arr = [1,2];
+Array.prototype.toString.call(arr); //1,2
+Object.prototype.toString.call(arr); // [object Array]
+arr.toString();
+
+arr.toString = function(){
+    return this.join('_')
+};
+console.log(arr.toString());
+
+메서드 오버라이드와 프로토타입 체이닝을 보여주는 예제이다.
+```
