@@ -173,3 +173,18 @@ data.forEach(function(datum){
 어떤 생성자 함수이든 prototype은 반드시 객체이기 때문에, Object.prototype이 언제나 프로토타입 체인의 최상단에 존재하게 된다.
 따라서, 객체에서만 사용할 메서드는 다른 여느 데이터 타입처럼 프로토타입 객체 안에 정의할 수가 없다.
 ```
+
+
+##### 6-10 Grade 생성자 함수와 인스턴스
+```bash
+var Grade = function () {
+    var args = Array.prototype.slice.call(arguments);
+    for(var i=0;i<args.length;i++){
+        this[i] = args[i];
+    }
+    this.length = args.length;
+};
+var g = new Grade(100,80);
+
+대각선의 __proto__를 연결하는 방법은 __proto__가 가리키는 대상, 즉 생성자 함수의 prototype이 연결하고자하는 상위 생성자 함수의 인스턴스를 바라보게끔 해주면 된다.
+```
