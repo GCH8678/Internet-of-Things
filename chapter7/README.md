@@ -90,3 +90,27 @@ console.log(g); // Grade { 0: 100, 1: 80, 2: 90, 4: 70, length: 5 }
 인스턴스와의 관계에서는 구체적인 데이터를 지니지 않고 오직 인스턴스가 사용할 메서드만을 지니는 추상적인 '틀'로서만 작용하게끔 작성하지 않는다면 언젠가 예제 7-3과 7-4와 같이 예기치 않은 오류가 발생할 가능성을 안고 가게 된다.
 ```
 
+##### 7-5 Recctangle.Square 클래스
+```bash
+var Rectangle = function(width,height){
+    this.width = width;
+    this.height = height;
+};
+Rectangle.prototype.getArea = function(){
+    return this.width*this.height
+};
+var rect = new Rectangle(3,4);
+console.log(rect.getArea())     //12
+
+var Square = function(width){
+    this.width = width;
+}
+Square.prototype.getArea = function(){
+    return this.width*this.width;
+}
+var sq = new Square(5);
+console.log(sq.getArea());      //25
+
+Rectangle과 Square 클래스에 width라는 프로퍼티가 공통이다. getArea는 내용이 다르지만 비슷하다.
+만약 Square에서 width 프로퍼티만 쓰지 않고 height 프로퍼티에 width 값을 부여하는 형태가 된다면 getArea도 동일하게 고칠 수 있을것이다.
+```
